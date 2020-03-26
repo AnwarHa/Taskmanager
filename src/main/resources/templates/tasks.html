@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tasks</title>
+</head>
+<body>
+<h1>Tasks</h1>
+
+<div th:if="${tasks.empty}">
+    No tasks left to do.
+</div>
+<table th:if="${!tasks.empty}">
+    <tr>
+        <th>Task</th>
+        <th>Due date & time</th>
+    </tr>
+
+    <tr th:each="task: ${tasks}">
+        <td th:text="${task.title}"></td>
+        <td th:text="${task.localDateTimeText}"></td>
+    </tr>
+
+</table>
+</body>
+</html>

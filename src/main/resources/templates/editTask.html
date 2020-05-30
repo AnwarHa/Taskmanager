@@ -7,7 +7,6 @@
 <body>
 
 <form method="post" th:action="@{/tasks/edit/{id}(id=${task.id})}" th:object="${task}">
-    <!-- <p th:text="${#fields.globalErrors()}"></p> !-->
     <h1 th:text="#{edit}"></h1>
     <div th:insert="nav.html"></div>
 

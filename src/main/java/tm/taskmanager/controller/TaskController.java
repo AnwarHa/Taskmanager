@@ -12,9 +12,6 @@ import tm.taskmanager.service.TaskServiceImp;
 
 import javax.validation.Valid;
 
-//TODO
-//Rest Controller ?
-
 @Controller
 @RequestMapping("/tasks")
 public class TaskController {
@@ -54,8 +51,6 @@ public class TaskController {
     }
 
     @RequestMapping("/edit/{id}")
-    // @Valid en BindingResult - look that shit up, kweeni wa da doet.
-    // Wanneer PutMapping gebruikt, geeft POST not supported 405 error. RequestMapping werkt wel.
     public String editTask(@ModelAttribute @Valid TaskDTO taskDTO, BindingResult bindingResult, @PathVariable("id") Integer id) {
         if (bindingResult.hasErrors()) {
             return "editTask.html";
@@ -78,9 +73,6 @@ public class TaskController {
     }
 
     @GetMapping("/")
-    // Wanneer je een lege string geeft, dan is de mapping = path in de RequestMapping beschreven boven de controller.
-    // Wanneer je enkel een "/" ingeeft, dan wordt de path beschreven boven de controller genegeerd als startpunt. (?)
-    // ! Zorg ervoor dat je accuraat het path beschrijft. Een extra "/" maakt verschil.
     public String home() {
         return "index.html";
     }

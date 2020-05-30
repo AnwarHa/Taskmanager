@@ -2,29 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Task details</title>
+    <title th:text="#{details}"></title>
 </head>
 <body>
-<h1>Task Details</h1>
+<h1 th:text="#{details}"></h1>
+<div th:insert="nav.html"></div>
 
 <div th:if="${task == null}">
-    Task not found.
+    <p th:text="#{nf}"></p>
 </div>
 
 <div th:if="${task != null}">
-    <h3>Title</h3>
+    <h3 th:text="#{title}"></h3>
     <p th:text="${task.title}"></p>
-    <h3>Description</h3>
+    <h3 th:text="#{description}"></h3>
     <p th:text="${task.description}"></p>
-    <h3>Due date & time</h3>
+    <h3 th:text="#{date}"></h3>
     <p th:text="${task.localDateTimeText}"></p>
 </div>
 
 <table th:if="${!subtasks.empty}">
-    <h2>Subtasks Details</h2>
+    <h2 th:text="#{sub.details}"></h2>
     <tr>
-        <th>Title</th>
-        <th>Description</th>
+        <th th:text="#{title}"></th>
+        <th th:text="#{description}"></th>
     </tr>
 
     <tr th:each="subtask: ${subtasks}">

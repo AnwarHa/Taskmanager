@@ -6,16 +6,11 @@
 </head>
 <body>
 <h1>Home</h1>
+<div th:insert="nav.html"></div>
 
-<nav>
-    <ul>
-        <li>
-            <a href="#" th:href="@{/}">Home</a>
-            <a href="#" th:href="@{/tasks}">Tasks overview</a>
-            <a href="#" th:href="@{/tasks/new}">Create Task</a>
-        </li>
-    </ul>
-</nav>
+<section>
+    <p th:text="#{buh}"></p>
+</section>
 
 </body>
 </html>

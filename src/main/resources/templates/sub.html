@@ -2,18 +2,21 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Task form</title>
+    <title th:text="#{task.form}"></title>
 </head>
 <body>
+
 <form method="post" th:action="@{/tasks/{id}/sub/create(id=${task.id})}">
-    <h1>Add subtask</h1>
+    <h1 th:text="#{add.subtask}"></h1>
+    <div th:insert="nav.html"></div>
+
     <p th:text="${task.title}"></p>
     <div>
-        <label for="title">Title: </label>
+        <label for="title" th:text="#{title}"></label>
         <input type="text" name="title" id="title">
     </div>
     <div>
-        <label for="description">Description: </label>
+        <label for="description" th:text="#{description}"></label>
         <input type="text" name="description" id="description">
     </div>
     <input type="submit" value="Add subtask">

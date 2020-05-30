@@ -2,18 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Tasks</title>
+    <title th:text="#{tasks}"></title>
 </head>
 <body>
-<h1>Tasks</h1>
+<h1 th:text="#{tasks}"></h1>
+<div th:insert="nav.html"></div>
 
 <div th:if="${tasks.empty}">
-    No tasks left to do.
+    <p th:text="#{nt}"></p>
 </div>
 <table th:if="${!tasks.empty}">
     <tr>
-        <th>Task</th>
-        <th>Due date & time</th>
+        <th th:text="#{task}"></th>
+        <th th:text="#{date}"></th>
     </tr>
 
     <tr th:each="task: ${tasks}">

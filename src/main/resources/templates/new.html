@@ -2,25 +2,27 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Task form</title>
+    <title th:text="#{task.form}"></title>
 </head>
 <body>
 <form method="post" th:action="@{/tasks/new}">
-    <h1>Add task</h1>
+    <h1 th:text="#{add.task}"></h1>
+    <div th:insert="nav.html"></div>
+
     <div>
-        <label for="title">Title: </label>
+        <label for="title" th:text="#{title}"></label>
         <input type="text" name="title" id="title">
     </div>
     <div>
-        <label for="description">Description: </label>
+        <label for="description" th:text="#{description}"></label>
         <input type="text" name="description" id="description">
     </div>
     <div>
-        <label for="localDateTime">Due Date: </label>
+        <label for="localDateTime" th:text="#{date}"></label>
         <input type="datetime-local" name="localDateTime" id="localDateTime">
         <!-- Zorg ervoor dat de naam van instantievariabele/getter en label/input overeenkomen !-->
     </div>
-    <input type="submit" value="Add task">
+    <input type="submit" value="Send">
 </form>
 
 </form>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<span th:text="#{lang.change}"></span>:
+<select id="locales">
+    <option value=""></option>
+    <option value="en" th:text="#{lang.en}"></option>
+    <option value="nl" th:text="#{lang.nl}"></option>
+</select>
+
+<nav>
+    <ul>
+        <li>
+            <a href="#" th:href="@{/}" th:text="#{home}"></a>
+            <a href="#" th:href="@{/tasks}" th:text="#{task.overview}"></a>
+            <a href="#" th:href="@{/tasks/new}" th:text="#{create.task}"></a>
+        </li>
+    </ul>
+</nav>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#locales").change(function () {
+            var selectedOption = $('#locales').val();
+            if (selectedOption != '' && window.location.href.match('.*\?lang\=..')) {
+                window.location.replace(window.location.href.substring(0, window.location.href.length - 8) + '?lang=' + selectedOption);
+            } else {
+                window.location.replace(window.location.href + '?lang=' + selectedOption);
+            }
+        })
+    });
+</script>

@@ -13,8 +13,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 @Entity
-// Voor één of andere reden moeten de entiteiten; Taks en Subtask, Serializable implementeren.
-// Anders wordt exception gegooid.
 public class Task implements Serializable {
 
     @Id
@@ -23,6 +21,7 @@ public class Task implements Serializable {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime localDateTime;
     private ArrayList<Subtask> subtasks;
+
 
     public String getDescription() {
         return description;

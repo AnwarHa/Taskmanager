@@ -65,16 +65,9 @@ public class TaskController {
         return "sub.html";
     }
 
-
     @PostMapping("/{id}/sub/create")
     public String addSubtask(@ModelAttribute SubtaskDTO subtask, @PathVariable("id") Integer id) {
         taskServiceImp.addSubtask(id, subtask);
         return "redirect:/tasks/" + id;
     }
-
-    @GetMapping("/")
-    public String home() {
-        return "index.html";
-    }
-
 }

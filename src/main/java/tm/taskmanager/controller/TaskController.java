@@ -7,7 +7,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import tm.taskmanager.dto.SubtaskDTO;
 import tm.taskmanager.dto.TaskDTO;
-import tm.taskmanager.service.Task;
 import tm.taskmanager.service.TaskServiceImp;
 
 import javax.validation.Valid;
@@ -28,8 +27,13 @@ public class TaskController {
     @GetMapping("/{id}")
     public String taskDetails(Model model, @PathVariable("id") Integer id) {
         model.addAttribute("taskId", id);
-        model.addAttribute("task", taskServiceImp.getTaskDTO(id));
-        model.addAttribute("subtasks", taskServiceImp.getSubtaskDTOs(id));
+        try {
+            model.addAttribute("task", taskServiceImp.getDTOfromTaskID(id));
+            model.addAttribute("subtasks", taskServiceImp.getDTOfromTaskID(id).getSubtasks());
+        }catch (Exception e){
+            model.addAttribute("error", "Task not found");
+            return "index.html";
+        }
         return "taskDetails.html";
     }
 
@@ -38,36 +42,43 @@ public class TaskController {
         return "new.html";
     }
 
-    @PostMapping("/new")
-    public String addTask(@ModelAttribute TaskDTO taskdto) {
-        taskServiceImp.addTask(taskdto);
-        return "redirect:/tasks";
-    }
-
     @GetMapping("/edit/{id}")
     public String editTaskPage(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("task", taskServiceImp.getTaskDTO(id));
+        model.addAttribute("task", taskServiceImp.getDTOfromTaskID(id));
         return "editTask.html";
-    }
-
-    @RequestMapping("/edit/{id}")
-    public String editTask(@ModelAttribute @Valid TaskDTO taskDTO, BindingResult bindingResult, @PathVariable("id") Integer id) {
-        if (bindingResult.hasErrors()) {
-            return "editTask.html";
-        }
-        taskServiceImp.editTask(taskDTO, id);
-        return "redirect:/tasks/" + id;
     }
 
     @GetMapping("/{id}/sub/create")
     public String addSubtaskPage(Model model, @PathVariable("id") Integer id) {
-        model.addAttribute("task", taskServiceImp.getTaskDTO(id));
+        model.addAttribute("task", taskServiceImp.getDTOfromTaskID(id));
         return "sub.html";
     }
 
+
+    @PostMapping("/new")
+    public String addTask(@ModelAttribute("taskdto") @Valid TaskDTO taskdto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "new.html";
+        }
+        taskServiceImp.addTaskWithDTO(taskdto);
+        return "redirect:/tasks";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editTask(@ModelAttribute("taskDTO") @Valid TaskDTO taskDTO, BindingResult bindingResult, @PathVariable("id") Integer id) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/tasks/edit/" + id;
+        }
+        taskServiceImp.editTaskWithDTO(taskDTO, id);
+        return "redirect:/tasks/" + id;
+    }
+
     @PostMapping("/{id}/sub/create")
-    public String addSubtask(@ModelAttribute SubtaskDTO subtask, @PathVariable("id") Integer id) {
-        taskServiceImp.addSubtask(id, subtask);
+    public String addSubtask(@ModelAttribute("subtaskDTO") @Valid SubtaskDTO subtaskDTO, BindingResult bindingResult, @PathVariable("id") Integer id) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/tasks/" + id + "/sub/create";
+        }
+        taskServiceImp.addSubtaskWithDTO(subtaskDTO, id);
         return "redirect:/tasks/" + id;
     }
 }

@@ -1,9 +1,8 @@
 package tm.taskmanager.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
-import tm.taskmanager.service.Subtask;
-import tm.taskmanager.service.Task;
-
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -11,10 +10,20 @@ import java.util.List;
 
 public class TaskDTO {
     private int id;
-    private String description, title;
+    @NotNull
+    @NotEmpty
+    private String description;
+    @NotNull
+    @NotEmpty
+    private String title;
+    @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime localDateTime;
     private List<SubtaskDTO> subtasks;
+
+    public TaskDTO(){
+
+    }
 
     public String getDescription() {
         return description;
@@ -24,13 +33,20 @@ public class TaskDTO {
         this.description = description;
     }
 
-
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLocalDateTimeText() {
@@ -46,31 +62,24 @@ public class TaskDTO {
         this.localDateTime = localDateTime;
     }
 
+
+    // SUBTASKS
     public List<SubtaskDTO> getSubtasks() {
-        if(subtasks == null){
+        if (subtasks == null) {
             subtasks = new ArrayList<>();
         }
         return subtasks;
     }
 
     public void setSubtasks(List<SubtaskDTO> subtasks) {
-        // Eigenlijk best gwn ArrayList gebruiken. Want als we dit setten, hebben we enkel List.
-        // Ma ben te lui, gebruik dit toch niet.
         this.subtasks = subtasks;
     }
 
     public void addSubtaskDTO(SubtaskDTO subtaskDTO) {
-        if(subtasks == null){
+        if (subtasks == null) {
             subtasks = new ArrayList<>();
         }
         subtasks.add(subtaskDTO);
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 }

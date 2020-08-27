@@ -21,7 +21,7 @@
     <p th:text="${task.localDateTimeText}"></p>
 </div>
 
-<table th:if="${!subtasks.empty}">
+<table th:if="${!subtasks.empty && subtasks != null}">
     <h2 th:text="#{sub.details}"></h2>
     <tr>
         <th th:text="#{title}"></th>

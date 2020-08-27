@@ -1,11 +1,14 @@
 package tm.taskmanager.service;
 
+import tm.taskmanager.dto.SubtaskDTO;
 import tm.taskmanager.dto.TaskDTO;
 
-import java.util.List;
-
 public interface TaskService {
-    List<TaskDTO> getTaskDTOs();
+    TaskDTO getDTOfromTask(Task task);
 
-    void addTask(TaskDTO taskDTO);
+    void addTaskWithDTO(TaskDTO taskDTO);
+
+    void editTaskWithDTO(TaskDTO taskDTO, int id);
+
+    void addSubtaskWithDTO(SubtaskDTO subtaskDTO, int id);
 }

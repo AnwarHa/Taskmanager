@@ -1,19 +1,28 @@
 package tm.taskmanager.service;
 
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
 public class Subtask implements Serializable {
-
     @Id
-    @GeneratedValue
+    @SequenceGenerator(name = "subtask_gen", initialValue = 100)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "subtask_gen")
     private int id;
-    private String description, title;
+    @NotNull
+    @NotEmpty
+    private String description;
+    @NotNull
+    @NotEmpty
+    private String title;
+    @ManyToOne
+    private Task parent;
+
+    public Subtask(){
+
+    }
 
     public String getDescription() {
         return description;
@@ -22,7 +31,6 @@ public class Subtask implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-
 
     public int getId() {
         return id;
@@ -40,4 +48,11 @@ public class Subtask implements Serializable {
         this.title = title;
     }
 
+    public Task getParent() {
+        return parent;
+    }
+
+    public void setParent(Task parent) {
+        this.parent = parent;
+    }
 }

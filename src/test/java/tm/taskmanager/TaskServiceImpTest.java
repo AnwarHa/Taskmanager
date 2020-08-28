@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import tm.taskmanager.dto.SubtaskDTO;
 import tm.taskmanager.dto.TaskDTO;
-import tm.taskmanager.service.Subtask;
-import tm.taskmanager.service.Task;
+import tm.taskmanager.domain.Subtask;
+import tm.taskmanager.domain.Task;
 import tm.taskmanager.service.TaskServiceImp;
 
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package tm.taskmanager.service;
+package tm.taskmanager.domain;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

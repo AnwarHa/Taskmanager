@@ -1,5 +1,6 @@
 package tm.taskmanager.service;
 
+import tm.taskmanager.domain.Task;
 import tm.taskmanager.dto.SubtaskDTO;
 import tm.taskmanager.dto.TaskDTO;
 

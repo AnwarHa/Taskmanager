@@ -2,6 +2,8 @@ package tm.taskmanager.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tm.taskmanager.domain.Subtask;
+import tm.taskmanager.domain.Task;
 import tm.taskmanager.dto.SubtaskDTO;
 import tm.taskmanager.dto.TaskDTO;
 import tm.taskmanager.repo.SubtaskRepository;

@@ -25,10 +25,10 @@ public class Task implements Serializable {
     @NotNull
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private LocalDateTime localDateTime;
-    @OneToMany(mappedBy = "parent")
+    @OneToMany(mappedBy = "parent", fetch = FetchType.EAGER)
     private List<Subtask> subtasks;
 
-    public Task(){
+    public Task() {
 
     }
 
